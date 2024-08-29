@@ -1,0 +1,1019 @@
+basePath: /api/v1
+definitions:
+  github_com_PixelzOrg_PHOLE_git_pkg_api_types.CommentResponse:
+    properties:
+      content:
+        type: string
+      created_at:
+        type: string
+      game_id:
+        type: string
+      id:
+        type: string
+      parent_id:
+        type: string
+      replies:
+        items:
+          $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.CommentResponse'
+        type: array
+      user_id:
+        type: string
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_api_types.CreateCommentRequest:
+    properties:
+      content:
+        type: string
+      parent_id:
+        type: string
+    required:
+    - content
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_api_types.CreateInteractionRequest:
+    properties:
+      playtime:
+        type: integer
+      type:
+        enum:
+        - play
+        - like
+        - bookmark
+        type: string
+    required:
+    - type
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_api_types.CreateInteractionResponse:
+    properties:
+      status:
+        type: string
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_api_types.CreateUserRequest:
+    properties:
+      bio:
+        type: string
+      birthday:
+        type: string
+      displayName:
+        type: string
+      email:
+        type: string
+      gender:
+        type: string
+      profileImageURL:
+        type: string
+      username:
+        type: string
+    required:
+    - email
+    - username
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_api_types.CreateUserResponse:
+    properties:
+      user:
+        $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.User'
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_api_types.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_api_types.FeedResponse:
+    properties:
+      games:
+        items:
+          $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.Game'
+        type: array
+      limit:
+        type: integer
+      page:
+        type: integer
+      totalGames:
+        type: integer
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_api_types.GameDetailsResponse:
+    properties:
+      game:
+        $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.Game'
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_api_types.GetCommentsByGameIdRequest:
+    properties:
+      game_id:
+        type: string
+      pagination:
+        $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.PaginationQuery'
+    required:
+    - game_id
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_api_types.GetUserProfileResponse:
+    properties:
+      bio:
+        type: string
+      displayName:
+        type: string
+      followersCount:
+        type: integer
+      followingCount:
+        type: integer
+      profileImageURL:
+        type: string
+      username:
+        type: string
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_api_types.PaginatedResponse:
+    properties:
+      data: {}
+      page:
+        type: integer
+      page_size:
+        type: integer
+      total_items:
+        type: integer
+      total_pages:
+        type: integer
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_api_types.PaginationQuery:
+    properties:
+      page:
+        minimum: 1
+        type: integer
+      page_size:
+        minimum: 1
+        type: integer
+    required:
+    - page
+    - page_size
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_api_types.RecordSeenGameResponse:
+    properties:
+      status:
+        type: string
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_api_types.SuccessResponse:
+    properties:
+      status:
+        type: string
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_api_types.UpdateUserProfileRequest:
+    properties:
+      bio:
+        type: string
+      displayName:
+        type: string
+      gender:
+        type: string
+      profileImageURL:
+        type: string
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_api_types.UpdateUserProfileResponse:
+    properties:
+      status:
+        type: string
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_models.Bookmark:
+    properties:
+      createdAt:
+        type: string
+      game:
+        $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.Game'
+      gameID:
+        type: string
+      id:
+        type: string
+      user:
+        $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.User'
+      userID:
+        type: string
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_models.Comment:
+    properties:
+      content:
+        type: string
+      createdAt:
+        type: string
+      game:
+        $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.Game'
+      gameID:
+        type: string
+      id:
+        type: string
+      isDeleted:
+        description: soft delete baby
+        type: boolean
+      parent:
+        $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.Comment'
+      parentID:
+        type: string
+      replies:
+        items:
+          $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.Comment'
+        type: array
+      user:
+        $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.User'
+      userID:
+        type: string
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_models.Follow:
+    properties:
+      createdAt:
+        type: string
+      follower:
+        $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.User'
+      followerID:
+        type: string
+      following:
+        $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.User'
+      followingID:
+        type: string
+      id:
+        type: string
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_models.Game:
+    properties:
+      bookmarkCount:
+        type: integer
+      buttonMapping:
+        type: boolean
+      commentCount:
+        type: integer
+      createdAt:
+        type: string
+      creator:
+        $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.User'
+      creatorID:
+        type: string
+      description:
+        type: string
+      embedLink:
+        type: string
+      gameType:
+        type: string
+      genre:
+        $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.Genre'
+      genreID:
+        type: string
+      id:
+        type: string
+      interactions:
+        items:
+          $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.UserGameInteraction'
+        type: array
+      isClaimed:
+        type: boolean
+      isDeleted:
+        type: boolean
+      isFeatured:
+        type: boolean
+      isLandscape:
+        type: boolean
+      likeCount:
+        type: integer
+      playCount:
+        type: integer
+      playTime:
+        type: string
+      seenByUsers:
+        items:
+          $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.UserSeenGame'
+        type: array
+      tags:
+        items:
+          $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.Tag'
+        type: array
+      thumbnailFileName:
+        type: string
+      title:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_models.Genre:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_models.Like:
+    properties:
+      createdAt:
+        type: string
+      game:
+        $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.Game'
+      gameID:
+        type: string
+      id:
+        type: string
+      user:
+        $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.User'
+      userID:
+        type: string
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_models.RecentlyPlayed:
+    properties:
+      game:
+        $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.Game'
+      gameID:
+        type: string
+      id:
+        type: string
+      lastPlayedAt:
+        type: string
+      playCount:
+        type: integer
+      user:
+        $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.User'
+      userID:
+        type: string
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_models.Tag:
+    properties:
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      games:
+        items:
+          $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.Game'
+        type: array
+      id:
+        type: integer
+      name:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_models.User:
+    properties:
+      bio:
+        type: string
+      birthday:
+        type: string
+      bookmarks:
+        items:
+          $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.Bookmark'
+        type: array
+      comments:
+        items:
+          $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.Comment'
+        type: array
+      createdAt:
+        type: string
+      displayName:
+        type: string
+      email:
+        type: string
+      followedBy:
+        items:
+          $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.Follow'
+        type: array
+      followersCount:
+        type: integer
+      following:
+        items:
+          $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.Follow'
+        type: array
+      followingCount:
+        type: integer
+      games:
+        items:
+          $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.Game'
+        type: array
+      gender:
+        type: string
+      likes:
+        items:
+          $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.Like'
+        type: array
+      profileImageURL:
+        type: string
+      recentlyPlayed:
+        items:
+          $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.RecentlyPlayed'
+        type: array
+      tags:
+        items:
+          $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.Tag'
+        type: array
+      uid:
+        type: string
+      updatedAt:
+        type: string
+      username:
+        type: string
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_models.UserGameInteraction:
+    properties:
+      bookmarkCount:
+        type: integer
+      commentCount:
+        type: integer
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      game:
+        $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.Game'
+      gameID:
+        type: string
+      id:
+        type: integer
+      lastInteraction:
+        type: string
+      likeCount:
+        type: integer
+      playCount:
+        type: integer
+      playTime:
+        type: integer
+      updatedAt:
+        type: string
+      user:
+        $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_models.User'
+      userID:
+        type: string
+    type: object
+  github_com_PixelzOrg_PHOLE_git_pkg_models.UserSeenGame:
+    properties:
+      createdAt:
+        type: string
+      gameID:
+        type: string
+      seenAt:
+        type: string
+      updatedAt:
+        type: string
+      userID:
+        type: string
+    type: object
+  gorm.DeletedAt:
+    properties:
+      time:
+        type: string
+      valid:
+        description: Valid is true if Time is not NULL
+        type: boolean
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: All you could need
+  title: Hitbox Backend AKA The P-HOLE
+  version: "1.0"
+paths:
+  /games/{gameId}:
+    get:
+      consumes:
+      - application/json
+      description: Get details of a game by game ID
+      parameters:
+      - description: Game ID
+        in: path
+        name: gameId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.GameDetailsResponse'
+      summary: Get details of a game by game ID
+      tags:
+      - games
+  /games/{gameId}/comments/{commentId}:
+    delete:
+      consumes:
+      - application/json
+      description: Soft delete a comment and all its replies. Only the comment author
+        or game creator can delete.
+      parameters:
+      - description: Comment ID
+        in: path
+        name: commentId
+        required: true
+        type: string
+      - description: Game ID
+        in: path
+        name: gameId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.SuccessResponse'
+      summary: Delete a comment and its replies
+      tags:
+      - comments
+  /games/{gameId}/comments/create:
+    post:
+      consumes:
+      - application/json
+      description: Create a new comment for a game or reply to an existing comment
+      parameters:
+      - description: Game ID
+        in: path
+        name: gameId
+        required: true
+        type: string
+      - description: Comment Content and Optional Parent ID
+        in: body
+        name: comment
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.CreateCommentRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.CommentResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.ErrorResponse'
+      summary: Create a new comment or reply
+      tags:
+      - comments
+  /games/{gameId}/comments/get:
+    post:
+      consumes:
+      - application/json
+      description: Get paginated comments for a specific game
+      parameters:
+      - description: Pagination and Game ID
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.GetCommentsByGameIdRequest'
+      - description: Game ID
+        in: path
+        name: gameId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.PaginatedResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.ErrorResponse'
+      summary: Get comments for a game
+      tags:
+      - comments
+  /games/{gameId}/interactions:
+    post:
+      consumes:
+      - application/json
+      description: Create an interaction (play, like, bookmark) for a game
+      parameters:
+      - description: Game ID
+        in: path
+        name: gameId
+        required: true
+        type: string
+      - description: Interaction details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.CreateInteractionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.CreateInteractionResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.ErrorResponse'
+      summary: Create an interaction for a game
+      tags:
+      - games
+  /games/{gameId}/seen:
+    post:
+      consumes:
+      - application/json
+      description: Record a game as seen by the user to improve recommendations
+      parameters:
+      - description: Game ID
+        in: path
+        name: gameId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.RecordSeenGameResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.ErrorResponse'
+      summary: Record a game as seen by the user
+      tags:
+      - games
+  /games/feed:
+    get:
+      consumes:
+      - application/json
+      description: Get a paginated feed of recommended games for the user or fallback
+        recommendations for anonymous users
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Limit per page
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.FeedResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.ErrorResponse'
+      summary: Get a feed of recommended games
+      tags:
+      - games
+  /users/{userId}/bookmarkedGames:
+    get:
+      consumes:
+      - application/json
+      description: Get paginated list of games bookmarked by a specific user (only
+        accessible by the user themselves)
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Page size
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.PaginatedResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.ErrorResponse'
+      summary: Get bookmarked games of a user
+      tags:
+      - users
+  /users/{userId}/followers:
+    get:
+      consumes:
+      - application/json
+      description: Get paginated list of followers for a specific user
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Page size
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.PaginatedResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.ErrorResponse'
+      summary: Get followers of a user
+      tags:
+      - users
+  /users/{userId}/following:
+    get:
+      consumes:
+      - application/json
+      description: Get paginated list of users followed by a specific user
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Page size
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.PaginatedResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.ErrorResponse'
+      summary: Get users followed by a user
+      tags:
+      - users
+  /users/{userId}/follows:
+    delete:
+      consumes:
+      - application/json
+      description: Remove a follow relationship between the authenticated user and
+        the target user
+      parameters:
+      - description: User ID to unfollow
+        in: path
+        name: userId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.SuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.ErrorResponse'
+      summary: Unfollow a user
+      tags:
+      - users
+    post:
+      consumes:
+      - application/json
+      description: Create a new follow relationship between the authenticated user
+        and the target user
+      parameters:
+      - description: User ID to follow
+        in: path
+        name: userId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.SuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.ErrorResponse'
+      summary: Follow a user
+      tags:
+      - users
+  /users/{userId}/games:
+    get:
+      consumes:
+      - application/json
+      description: Get paginated list of games created by a specific user
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Page size
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.PaginatedResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.ErrorResponse'
+      summary: Get games created by user
+      tags:
+      - users
+  /users/{userId}/likedGames:
+    get:
+      consumes:
+      - application/json
+      description: Get paginated list of games liked by a specific user (only accessible
+        by the user themselves)
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Page size
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.PaginatedResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.ErrorResponse'
+      summary: Get liked games of a user
+      tags:
+      - users
+  /users/{userId}/recentlyPlayedGames:
+    get:
+      consumes:
+      - application/json
+      description: Get paginated list of games recently played by a specific user
+        (only accessible by the user themselves)
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Page size
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.PaginatedResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.ErrorResponse'
+      summary: Get recently played games of a user
+      tags:
+      - users
+  /users/createUser:
+    post:
+      consumes:
+      - application/json
+      description: Create a new user in the system after Supabase authentication
+      parameters:
+      - description: UID token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: User information
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.CreateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.CreateUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.ErrorResponse'
+      summary: Create a new user
+      tags:
+      - users
+  /users/profile/{userId}:
+    get:
+      consumes:
+      - application/json
+      description: Get profile for user, following and followers count
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.GetUserProfileResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.ErrorResponse'
+      summary: Get user profile
+      tags:
+      - users
+    patch:
+      consumes:
+      - application/json
+      description: Update the profile information for the authenticated user
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      - description: Update User Profile Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.UpdateUserProfileRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.UpdateUserProfileResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_PixelzOrg_PHOLE_git_pkg_api_types.ErrorResponse'
+      summary: Update user profile
+      tags:
+      - users
+swagger: "2.0"
